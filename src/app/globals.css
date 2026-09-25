@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Paleta AYRU ORGANIC — extraída de las piezas de marca (canales RGB para opacidad) */
+:root {
+  --bosque: 28 70 24; /* #1C4618 */
+  --bosque-900: 18 48 15; /* #12300F */
+  --oliva: 92 109 55; /* #5C6D37 */
+  --salvia: 227 236 214; /* #E3ECD6 */
+  --lino: 245 236 222; /* #F5ECDE */
+  --papel: 251 247 239; /* #FBF7EF */
+  --kraft: 230 207 180; /* #E6CFB4 */
+  --canela: 168 110 64; /* #A86E40 */
+  --arcilla: 156 59 36; /* #9C3B24 */
+  --tinta: 33 39 20; /* #212714 */
+  --tinta-suave: 91 94 76; /* #5B5E4C */
+  --linea: 221 208 186; /* #DDD0BA */
+
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    background-color: rgb(var(--lino));
+    font-size: 106.25%; /* 17px en móvil: lectura cómoda para personas no técnicas */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      font-size: 100%;
+    }
+  }
+
+  body {
+    @apply bg-lino font-sans text-tinta antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 100% 0%, rgb(var(--salvia) / 0.9), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 0% 100%, rgb(var(--kraft) / 0.45), transparent 70%);
+    background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-bosque;
+    font-optical-sizing: auto;
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-canela ring-offset-2 ring-offset-lino;
+  }
+
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
+@layer utilities {
+  .cifra {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Textura de papel sutil para superficies destacadas */
+  .grano {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.13 0 0 0 0 0.15 0 0 0 0 0.08 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .pb-seguro {
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
